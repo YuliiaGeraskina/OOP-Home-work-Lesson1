@@ -1,0 +1,118 @@
+import java.util.Scanner;
+
+public class Car {
+	public static final String Name = "Car";
+	private boolean start, turnoff, go;
+	private String speed;
+
+	public Car() {
+		start = false;
+		turnoff = false;
+		go = false;
+		speed = "";
+
+	}
+
+	public Car(boolean start, boolean turnoff, boolean go) {
+		this.start = start;
+		this.turnoff = turnoff;
+		this.go = go;
+
+	}
+
+	public boolean getStart() {
+		return start;
+	}
+
+	public void setSart(String s) {
+		if ((s.equalsIgnoreCase("Yes")) || (s.equalsIgnoreCase("Да"))) {
+			this.start = true;
+			this.turnoff = true;
+		} else {
+			this.start = false;
+			this.turnoff = false;
+		}
+
+	}
+
+	public boolean getTurnOff() {
+		return turnoff;
+	}
+
+	public void setTurnOff(String s) {
+		if ((s.equalsIgnoreCase("Yes")) || (s.equalsIgnoreCase("Да"))) {
+			this.turnoff = false;
+			this.go = false;
+			this.start = false;
+
+		} else
+			this.turnoff = true;
+
+	}
+
+	public boolean getGoCar() {
+		return go;
+	}
+
+	public void setGoCar(String s) {
+		if ((s.equalsIgnoreCase("Yes")) || (s.equalsIgnoreCase("Да")))
+			this.go = true;
+
+	}
+
+	public String setSpeed(boolean s) {
+		if (s == true)
+			speed = "25";
+		return speed;
+
+	}
+
+
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Car c = new Car();
+		String s = "";
+		// String s1 = "";
+		// String s2 = "";
+
+		while (s != "Exit") {
+			boolean b = c.getStart();
+			boolean b1 = c.getTurnOff();
+			boolean b2 = c.getGoCar();
+			if ((b == true) && (b2 == true))
+				System.out.println("Машина заведена");
+			else {
+				System.out.println("Машина не заведена");
+				System.out.print("Вы хотите завести машину? ");
+				s = sc.nextLine();
+				c.setSart(s);
+			}
+			b1 = c.getTurnOff();
+
+			if (b1 == false)
+				System.out.println("Двигатель заглушен");
+			else {
+				System.out.println("Двигатель работает");
+				System.out.print("Вы хотите заглушить двигатель? ");
+				s = sc.nextLine();
+				c.setTurnOff(s);
+			}
+			b2 = c.getGoCar();
+			b = c.getStart();
+
+			if ((b2 == true) && (b == true))
+				System.out.println("Машина едет со скоростью " + c.setSpeed(b2)
+						+ " км/ч");
+			else {
+				System.out.println("Машина не едет");
+				System.out.print("Вы хотите поехать? ");
+				sc = new Scanner(System.in);
+				s = sc.nextLine();
+				c.setGoCar(s);
+			}
+
+		}
+		sc.close();
+	}
+}
